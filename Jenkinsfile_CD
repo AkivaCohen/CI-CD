@@ -1,0 +1,48 @@
+pipeline {
+  agent any
+
+//   tools {nodejs "node"}
+
+  stages {
+
+    stage('install NodeJS if not installed') {
+      steps {
+        sh 'chmod +x ./nodejs_install.sh'
+        sh './nodejs_install.sh'
+        sh 'node --version'
+      }
+    }
+
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/xxxx'
+      }
+    } 
+    stage('Install pm2') {
+      steps {
+        sh 'npm i -g pm2'
+      }
+    }
+    stage('Install dependencies') {
+      steps {
+        sh 'npm install'
+      }
+    }   
+    stage('initdb') {
+      steps {
+         sh 'npm run initdb'
+      }
+    }
+    stage('run server') {
+      steps {
+         sh 'pm2 npm run dev'
+      }
+    }    
+
+  }
+
+}
+
+
+
+
