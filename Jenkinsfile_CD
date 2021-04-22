@@ -17,7 +17,19 @@ pipeline {
       steps {
         git 'https://github.com/xxxx'
       }
-    } 
+    }
+
+    stage('Copy Archive') {
+         steps {
+             script {
+                step ([$class: 'CopyArtifact',
+                    projectName: 'CI-pipeline',
+                    filter: ".env",
+                    target: '.']);
+            }
+        }
+    }
+
     stage('Install pm2') {
       steps {
         sh 'npm i -g pm2'
