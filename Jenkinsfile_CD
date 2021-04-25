@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent { label $SLAVE_NODE}
 
 //   tools {nodejs "node"}
 
@@ -15,7 +15,7 @@ pipeline {
 
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/xxxx'
+        git 'https://github.com/AkivaCohen/WeightTracker.git'
       }
     }
 

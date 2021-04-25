@@ -1,31 +1,42 @@
-  pipeline {
-    agent {
-        docker {
-            image 'bhgedigital/envsubst'
-            args '--user=root'
-            // label 'docker-node'
-        }
+pipeline {
+  agent {
+      docker {
+          image 'bhgedigital/envsubst'
+          args '--user=root'
+          // label 'docker-node'
+      }
+  }
+
+  stages {
+    stage('fetch_latest_code') {
+      steps {
+        git branch: 'main', url: 'https://github.com/AkivaCohen/WeightTracker.git'
+        sh 'printenv'
+      }
+    }
+    
+    stage('envsubst') {
+          steps {
+              sh 'envsubst < .env.template > .env'
+          }
     }
 
-    stages {
-      stage('fetch_latest_code') {
-        steps {
-          git branch: 'main', url: 'https://github.com/AkivaCohen/WeightTracker.git'
-          sh 'printenv'
-        }
+    stage('archive') {
+      steps {
+        sh 'cat .env'
+        archiveArtifacts artifacts: '.env'
       }
-      
-      stage('envsubst') {
-            steps {
-                sh 'envsubst < .env.template > .env'
-            }
-      }
-      stage('archive') {
-        steps {
-          sh 'cat .env'
-          archiveArtifacts artifacts: '.env'
-        }
-      }
+    }
 
-    } 
+    stage ('Invoke_pipeline') {
+      steps {
+          build job: 'CD-pipline',
+          parameters: [
+          string(name: 'SLAVE_NODE', value: "test1")
+          ]
+      }
+    }
+    
   }
+
+}
