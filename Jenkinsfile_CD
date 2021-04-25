@@ -1,7 +1,14 @@
+node('master') {
+  stage('set agent'){
+        AGENT_LABEL = "${env.SLAVE_NODE}"
+        sh "echo ${AGENT_LABEL}"
+   }
+}
+
 pipeline {
     agent {
         node {
-            label "${env.SLAVE_NODE}"
+            label "${AGENT_LABEL}"
         }
     }
 //   tools {nodejs "node"}
