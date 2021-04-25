@@ -1,5 +1,5 @@
 pipeline {
-  agent { label '${SLAVE_NODE}'}
+  agent { label ${SLAVE_NODE}}
 
 //   tools {nodejs "node"}
 
