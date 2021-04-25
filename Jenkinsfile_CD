@@ -1,6 +1,9 @@
 pipeline {
-  agent { label "${SLAVE_NODE}"}
-
+    agent {
+        node {
+            label "${env.SLAVE_NODE}"
+        }
+    }
 //   tools {nodejs "node"}
 
   stages {
