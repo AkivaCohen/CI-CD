@@ -1,7 +1,8 @@
 node('master') {
   stage('set agent'){
-        AGENT_LABEL = "${env.SLAVE_NODE}"
+        AGENT_LABEL = ${env.SLAVE_NODE}
         sh "echo ${AGENT_LABEL}"
+        sh 'printenv'
    }
 }
 
