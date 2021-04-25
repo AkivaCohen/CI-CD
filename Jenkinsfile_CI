@@ -33,7 +33,7 @@ pipeline {
       steps {
           build job: 'CD-pipline',
           parameters: [
-          string(name: 'SLAVE_NODE', value: "test1")
+          [$class: 'LabelParameterValue', name: 'node', label: "test1" ]
           ]
       }
     }
