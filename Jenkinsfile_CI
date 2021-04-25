@@ -1,6 +1,7 @@
 pipeline {
   agent {
       docker {
+          label "master"
           image 'bhgedigital/envsubst'
           args '--user=root'
           // label 'docker-node'
@@ -36,7 +37,7 @@ pipeline {
           ]
       }
     }
-    
+
   }
 
 }
