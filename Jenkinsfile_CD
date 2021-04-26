@@ -5,7 +5,7 @@
 //         sh 'printenv'
 //    }
 // }
-
+def nodeName
 pipeline {
     agent {
         node {
