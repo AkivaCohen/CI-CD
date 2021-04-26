@@ -1,25 +1,19 @@
-// node('master') {
-//   stage('set agent'){
-//         AGENT_LABEL = ${env.SLAVE_NODE}
-//         sh "echo ${AGENT_LABEL}"
-//         sh 'printenv'
-//    }
-// }
+
 def nodeName
+
 pipeline {
     agent {
         node {
             label nodeName
         }
     }
-//   tools {nodejs "node"}
+
 
   stages {
 
     stage('install NodeJS if not installed') {
       steps {
-        sh 'chmod +x ./nodejs_install.sh'
-        sh './nodejs_install.sh'
+        sh 'curl -sL https://raw.githubusercontent.com/AkivaCohen/CI-CD/main/nodejs_install.sh | sudo -E bash -'
         sh 'node --version'
       }
     }
@@ -58,7 +52,9 @@ pipeline {
     }
     stage('run server') {
       steps {
-         sh 'pm2 npm run dev'
+         sh 'sudo pm2 start npm -- run dev'
+         sh 'sudo pm2 save'
+         sh 'sudo pm2 startup'
       }
     }    
 
