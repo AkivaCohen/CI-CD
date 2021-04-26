@@ -54,7 +54,7 @@ pipeline {
       steps {
          sh 'pm2 start npm -- run dev'
          sh 'pm2 save'
-         sh 'pm2 startup'
+         sh 'sudo pm2 startup'
       }
     }    
 
