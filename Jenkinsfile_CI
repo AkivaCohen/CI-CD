@@ -31,10 +31,7 @@ pipeline {
     stage ('Invoke_pipeline') {
       steps {
         //   build job: 'CD-pipline', parameters: [[$class: 'NodeParameterValue', name: 'UPSTREAM_NODE', labels: ['my_node'], nodeEligibility: [$class: 'AllNodeEligibility']]]
-          build job: 'CD-pipline',
-          parameters: [
-          [$class: 'LabelParameterValue', name: 'node', label: "test1" ]
-          ]
+        build job: 'CD-pipline', parameters: [[$class: 'LabelParameterValue', name: 'nodeName', label: 'test1']]
       }
     }
 
