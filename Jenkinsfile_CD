@@ -37,7 +37,7 @@ pipeline {
 
     stage('Install pm2') {
       steps {
-        sh 'npm i -g pm2'
+        sh 'sudo npm i -g pm2'
       }
     }
     stage('Install dependencies') {
