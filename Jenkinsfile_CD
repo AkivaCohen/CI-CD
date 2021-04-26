@@ -20,7 +20,7 @@ pipeline {
 
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/AkivaCohen/WeightTracker.git'
+        git branch: 'main', url: 'https://github.com/AkivaCohen/WeightTracker.git'
       }
     }
 
