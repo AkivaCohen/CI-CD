@@ -28,7 +28,7 @@
         steps {
             withCredentials([azureServicePrincipal('f5db9c89-7864-4b66-b0af-fc60b9daffc2')]) {
                 sh 'terraform init'
-                sh "terraform plan -var subscription_id=$AZURE_SUBSCRIPTION_ID -var client_id=$AZURE_CLIENT_ID -var client_secret=$AZURE_CLIENT_SECRET -var tenand_id=$AZURE_TENANT_ID"
+                sh "terraform plan -var subscription_id=$AZURE_SUBSCRIPTION_ID -var client_id=$AZURE_CLIENT_ID -var client_secret=$AZURE_CLIENT_SECRET -var tenant_id=$AZURE_TENANT_ID"
             }
         }      
       }
