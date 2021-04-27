@@ -16,7 +16,7 @@
 
       stage('azure cli login') {
           steps {
-            withCredentials([azureServicePrincipal('principal-credentials-id')]) {
+            withCredentials([azureServicePrincipal('f5db9c89-7864-4b66-b0af-fc60b9daffc2')]) {
               sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
               sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
             //   sh 'az resource list'
@@ -28,7 +28,6 @@
         steps {
           sh 'terraform init'
           sh 'terraform plan'
-          -var 'subscription_id='$AZURE_SUBSCRIPTION_ID -var 'client_id='$AZURE_CLIENT_ID -var 'client_secret='$AZURE_CLIENT_SECRET 'tenand_id='$AZURE_TENANT_ID
         }      
       }
 
